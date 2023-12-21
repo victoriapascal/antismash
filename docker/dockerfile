@@ -31,8 +31,8 @@ RUN mv smcogs.hmm gutsmash/antismash/detection/genefunctions/gut_data/
 # RUN unzip KnownClusterBlast.zip -d gutsmash/antismash/modules/clusterblast/data/known
 
 COPY --from=gdown /ClusterBlast.zip /ClusterBlast.zip
-RUN unzip ClusterBlast.zip -d ClusterBlast
-RUN mv ClusterBlast gutsmash/antismash/databases/
+RUN unzip ClusterBlast.zip -d clusterblast
+RUN mv clusterblast gutsmash/antismash/databases/
 
 
 FROM mambaorg/micromamba:1.1.0
@@ -43,6 +43,11 @@ COPY --chown=$MAMBA_USER:$MAMBA_USER docker/env.yaml /tmp/env.yaml
 RUN micromamba install -y -n base -f /tmp/env.yaml && \
     micromamba clean --all --yes
 
+USER root
 COPY --from=downloader /gutsmash /usr/share/gutsmash
+RUN chmod -R u+r /usr/share/gutsmash/
+RUN chmod -R u-w /usr/share/gutsmash/
+RUN hmmpress /usr/share/gutsmash/antismash/detection/genefunctions/gut_data/smcogs.hmm
 
+USER $MAMBA_USER
 ENV PATH=/opt/conda/bin/:/opt/conda/condabin:/usr/share/gutsmash/:$PATH
