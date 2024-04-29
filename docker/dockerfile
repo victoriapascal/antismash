@@ -45,9 +45,16 @@ RUN micromamba install -y -n base -f /tmp/env.yaml && \
 
 USER root
 COPY --from=downloader /gutsmash /usr/share/gutsmash
-RUN chmod -R u+r /usr/share/gutsmash/
-RUN chmod -R u-w /usr/share/gutsmash/
+RUN chmod -R 777 /usr/share/gutsmash/
 RUN hmmpress /usr/share/gutsmash/antismash/detection/genefunctions/gut_data/smcogs.hmm
 
-USER $MAMBA_USER
+RUN apt-get update && apt-get install -y hmmer2 hmmer fasttree prodigal ncbi-blast+ muscle
+
 ENV PATH=/opt/conda/bin/:/opt/conda/condabin:/usr/share/gutsmash/:$PATH
+
+COPY ./GCA_000006765.1_ASM676v1_genomic.fna /tmp/GCA_000006765.1_ASM676v1_genomic.fna
+RUN run_gutsmash.py --cpus 4 --genefinding-tool prodigal --cb-knownclusters --cb-general \
+    --enable-genefunctions --output-dir GCA_000006765.1 GCA_000006765.1_ASM676v1_genomic.fna
+
+RUN chmod -R u-w /usr/share/gutsmash/
+USER $MAMBA_USER
