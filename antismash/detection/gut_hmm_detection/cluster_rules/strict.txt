@@ -260,3 +260,9 @@ RULE NADH_dehydrogenase_I
     CUTOFF 10
     NEIGHBOURHOOD 10
     CONDITIONS (Oxidored_q4 and Oxidored_q6 and Complex1_30kDa and Complex1_49kDa and NADHdh and Oxidored_q3 and Oxidored_q2 and minimum(4, [Fe-2S_thioredx, Fer2_4, Fer4_7, Molybdop_Fe4S4, Molydop_binding, NADH-G_4Fe-4S_3, NADH_4Fe-4S, Proton_antipo_M, Proton_antipo_N, SLBB]))
+
+RULE uric_acid
+    COMMENT uric acid metabolism
+    CUTOFF 10
+    NEIGHBOURHOOD 10
+    CONDITIONS XDH and Peptidase_M20 and minimum(2, [DHP, SER, PALP])

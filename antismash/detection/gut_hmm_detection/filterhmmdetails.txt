@@ -58,3 +58,4 @@ PAD_porph,Amidinotransf
 Thiolase_N,ketoacyl-synt
 Succ_CoA_lig,Ligase_CoA
 PTA_PTB,FA_synthesis
+XDH,DHP,SER

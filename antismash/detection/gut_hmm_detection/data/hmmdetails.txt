@@ -475,3 +475,6 @@ Oxidored_q3	NADH-ubiquinone/plastoquinone oxidoreductase chain 6	33	Oxidored_q3.
 Oxidored_q4	NADH-ubiquinone/plastoquinone oxidoreductase, chain 3	23	Oxidored_q4.hmm
 hpdC	4-hydroxyphenylacetate decarboxylase small gamma subunit	15	hpdC.hmm
 EKR	Domain of unknown function	19	EKR.hmm
+DHP	Dihydropyrimidinase	500	DHP.hmm
+SER	Selenate reductase	1400	SER.hmm
+XDH	Xanthine dehydrogenase	1200	XDH.hmm
