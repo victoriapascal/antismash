@@ -67,7 +67,9 @@ python3 gutsmash/run_gutsmash.py --help
 Publications
 ------------
 
-See our [preprint](https://www.biorxiv.org/content/10.1101/2021.02.25.432841v1) on BioRxiv for information on citing gutSMASH.
+See our [article](https://www.nature.com/articles/s41587-023-01675-1) for more information and to cite gutSMASH.
+
+Users might also want to check the [gutSMASH webserver](https://gutsmash.bioinformatics.nl/) and the corresponding [article](https://academic.oup.com/nar/article/49/W1/W263/6279837)
 
 License
 -------
