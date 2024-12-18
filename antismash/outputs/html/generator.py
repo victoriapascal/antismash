@@ -3,23 +3,25 @@
 
 """ Responsible for creating the single web page results """
 
-import json
 import string
 import os
 from typing import Any, Dict, List, Tuple, Union
 
 from antismash.common import path, module_results
 from antismash.common.html_renderer import FileTemplate, HTMLSections, docs_link
-from antismash.common.layers import RecordLayer, OptionsLayer
+from antismash.common.layers import RecordLayer, OptionsLayer, RegionLayer
 from antismash.common.secmet import Record
-from antismash.common.json import JSONOrf
+from antismash.common import json
 from antismash.config import ConfigType
 from antismash.outputs.html import js
 from antismash.custom_typing import AntismashModule
 
 
 def build_json_data(records: List[Record], results: List[Dict[str, module_results.ModuleResults]],
-                    options: ConfigType) -> Tuple[List[Dict[str, Any]], List[Dict[str, Union[str, List[JSONOrf]]]]]:
+                    options: ConfigType) -> Tuple[
+                        List[Dict[str, Any]],
+                        dict[str, dict[str, json.JSONCompatible]],
+                    ]:
     """ Builds JSON versions of records and domains for use in drawing SVGs with
         javascript.
 
@@ -36,23 +38,24 @@ def build_json_data(records: List[Record], results: List[Dict[str, module_result
 
     from antismash import get_all_modules  # TODO break circular dependency
     js_records = js.convert_records(records, results, options)
+    js_results: dict[str, dict[str, json.JSONCompatible]] = {}
 
-    js_domains = []
     for i, record in enumerate(records):
         json_record = js_records[i]
         json_record['seq_id'] = "".join(char for char in json_record['seq_id'] if char in string.printable)
         for region, json_region in zip(record.get_regions(), json_record['regions']):
             handlers = find_plugins_for_cluster(get_all_modules(), json_region)
+            region_results = {}
             for handler in handlers:
                 # if there's no results for the module, don't let it try
                 if handler.__name__ not in results[i]:
                     continue
-                if "generate_js_domains" in dir(handler):
-                    domains_by_region = handler.generate_js_domains(region, record)
-                    if domains_by_region:
-                        js_domains.append(domains_by_region)
-
-    return js_records, js_domains
+                if hasattr(handler, "generate_js_domains"):
+                    data = handler.generate_js_domains(region, record, results[i][handler.__name__])
+                    region_results[handler.__name__] = data
+            if region_results:
+                js_results[RegionLayer.build_anchor_id(region)] = region_results
+    return js_records, js_results
 
 
 def write_regions_js(records: List[Dict[str, Any]], output_dir: str,
@@ -67,11 +70,8 @@ def write_regions_js(records: List[Dict[str, Any]], output_dir: str,
                 regions[region['anchor']] = region
                 regions['order'].append(region['anchor'])
         handle.write('var all_regions = %s;\n' % json.dumps(regions, indent=4))
+        handle.write(f"var details_data = {json.dumps(js_domains)};\n")
 
-        clustered_domains = {}
-        for region in js_domains:
-            clustered_domains[region['id']] = region
-        handle.write('var details_data = %s;\n' % json.dumps(clustered_domains, indent=4))
 
 
 def generate_html_sections(records: List[RecordLayer], results: Dict[str, Dict[str, module_results.ModuleResults]],

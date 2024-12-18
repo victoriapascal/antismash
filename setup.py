@@ -24,6 +24,8 @@ install_requires = [
     'pyScss',
     'matplotlib',
     'scipy',
+    'MOODS-python',
+    'orjson',
     'scikit-learn == 0.19.0', # until pickles are rebuilt automatically
 ]
 

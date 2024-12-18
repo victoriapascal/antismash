@@ -1,0 +1,24 @@
+<div class="tfbs-sidepanel">
+ <div class="heading">
+   <span>TFBS definitions</span>
+   {{ help_tooltip(tooltip, "tfbs-side") }}
+ </div>
+ <div class = 'prediction-text'>
+  <table class="tfbs-sidepanel-table">
+    <thead>
+     <tr>
+      <th>Regulator</th>
+      <th>Description</th>
+     </tr>
+    </thead>
+    <tbody>
+    {% for name, data in descriptions.items() %}
+     <tr>
+      <td><a href="{{ data.link }}" target="_blank">{{ name.replace('_', ' ') }}</a></td>
+      <td>{{ data.description }}</td>
+     </tr>
+    {% endfor %}
+    </tbody>
+   </table>
+  </div>
+</div>

@@ -45,6 +45,7 @@ from antismash.modules import (active_site_finder,
                                pfam2go,
                                smcog_trees,
                                tta,
+                               tfbs_finder
                                )
 from antismash.outputs import html, svg
 from antismash.custom_typing import AntismashModule
@@ -88,7 +89,7 @@ def get_analysis_modules() -> List[AntismashModule]:
             a list of modules
     """
     return [smcog_trees, tta, clusterblast,  # type: ignore
-             active_site_finder, pfam2go]
+             active_site_finder, pfam2go, tfbs_finder]
 
 
 def get_output_modules() -> List[AntismashModule]:

@@ -1,4 +1,5 @@
 @import 'secmet';
+$body-background: white;
 $medium-gray: #444;
 $light-gray: #eee;
 $light-red: orangered;
@@ -14,6 +15,7 @@ $gene-type-encapsulation: DarkOrange;
 $gene-type-transport: #6E8EFF;
 $gene-type-resistance: #C64A9D;
 $feature-tta-codon: magenta;
+$feature-resistance: #bbb;
 $table-background: #f1f1f1;
 $tool-cassis: wheat;
 $tool-clusterfinder: teal;
@@ -26,16 +28,20 @@ $tool-rule-based-clusters: white;
     user-select: none;
 }
 
+.serif {
+    font-family: "Courier New", serif;
+}
+
 body {
     font-family: Helvetica, Verdana, Tahoma, Sans-Serif;
     color: #555;
-    background-color: white;
+    background-color: $body-background;
     text-align: left;
     margin: 0;
     padding: 0;
 }
 
-a, .clipboard-copy {
+a, .clipboard-copy, .link-like {
     text-decoration: none;
     background-color: rgba(225, 225, 225, 0.9);
     border-radius: 2px;
@@ -570,9 +576,13 @@ table.region-table {
     stroke: #888;
 }
 .svgene-locustag {
+    @extend .serif;
     fill: $antismash-main;
     display: none;
-    font-size: 80%;
+    font-size: 85%;
+}
+.svgene-locustag-background {
+    fill: $body-background;
 }
 
 .cluster-core {
@@ -599,6 +609,14 @@ table.region-table {
 .svgene-selected-orf {
     stroke: #000;
     stroke-width: 1px;
+}
+.svgene-binding-site {
+    line {
+        stroke: black;
+    }
+    circle {
+        fill: black;
+    }
 }
 
 .legend-items, .zoom-buttons {
@@ -697,6 +715,9 @@ table.region-table {
 .legend-tta-codon {
     background-color: $feature-tta-codon;
 }
+.legend-resistance {
+    background-color: $feature-resistance;
+}
 
 .legend {
     h4 {
@@ -706,11 +727,15 @@ table.region-table {
     @include left-padding;
 }
 
-.legend-field {
+.legend-symbol {
     float: left;
     width: 1em;
     height: 1em;
     margin-right: 0.25em;
+}
+
+.legend-field {
+    @extend .legend-symbol;
     border: 1px solid black;
 }
 
@@ -747,6 +772,7 @@ table.region-table {
 
 .details-svg {
     margin: 0 2%;
+    margin-top: 2px;
 }
 
 .jsdomain-line {
@@ -754,6 +780,8 @@ table.region-table {
     stroke: #888;
 }
 .jsdomain-orflabel {
+    @extend .serif;
+    font-size: 75%;
     fill: #444;
 }
 .jsdomain-tooltip {
@@ -765,6 +793,7 @@ table.region-table {
 }
 
 .clusterblast-locustag {
+    @extend .serif;
     fill: $antismash-main;
     display: none;
     font-size: 80%;
@@ -936,6 +965,11 @@ ul.dropdown-options {
         margin-right: 0.1em;
         padding-left: 0.5em;
         padding-right: 0.5em;
+        padding-top: 1px;
+
+        /* solve edge single pixel gap */
+        padding-bottom: 1px;
+        margin-bottom: -1px;
 
         border-top-left-radius: 1em;
         border-top-right-radius: 1em;
@@ -1042,8 +1076,8 @@ ul.dropdown-options {
     .help-icon {
         display: inline-block;
         float: right;
-        -webkit-mask: url(../images/question-circle-solid.svg) no-repeat center;  /* opera, chrome, and safari */
-        mask: url(../images/question-circle-solid.svg) no-repeat center;
+        -webkit-mask: url('data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1p Y29uPSJxdWVzdGlvbi1jaXJjbGUiIGNsYXNzPSJzdmctaW5saW5lLS1mYSBmYS1x dWVzdGlvbi1jaXJjbGUgZmEtdy0xNiIgcm9sZT0iaW1nIiB4bWxucz0iaHR0cDov L3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0 aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik01MDQgMjU2YzAgMTM2Ljk5Ny0xMTEu MDQzIDI0OC0yNDggMjQ4UzggMzkyLjk5NyA4IDI1NkM4IDExOS4wODMgMTE5LjA0 MyA4IDI1NiA4czI0OCAxMTEuMDgzIDI0OCAyNDh6TTI2Mi42NTUgOTBjLTU0LjQ5 NyAwLTg5LjI1NSAyMi45NTctMTE2LjU0OSA2My43NTgtMy41MzYgNS4yODYtMi4z NTMgMTIuNDE1IDIuNzE1IDE2LjI1OGwzNC42OTkgMjYuMzFjNS4yMDUgMy45NDcg MTIuNjIxIDMuMDA4IDE2LjY2NS0yLjEyMiAxNy44NjQtMjIuNjU4IDMwLjExMy0z NS43OTcgNTcuMzAzLTM1Ljc5NyAyMC40MjkgMCA0NS42OTggMTMuMTQ4IDQ1LjY5 OCAzMi45NTggMCAxNC45NzYtMTIuMzYzIDIyLjY2Ny0zMi41MzQgMzMuOTc2QzI0 Ny4xMjggMjM4LjUyOCAyMTYgMjU0Ljk0MSAyMTYgMjk2djRjMCA2LjYyNyA1LjM3 MyAxMiAxMiAxMmg1NmM2LjYyNyAwIDEyLTUuMzczIDEyLTEydi0xLjMzM2MwLTI4 LjQ2MiA4My4xODYtMjkuNjQ3IDgzLjE4Ni0xMDYuNjY3IDAtNTguMDAyLTYwLjE2 NS0xMDItMTE2LjUzMS0xMDJ6TTI1NiAzMzhjLTI1LjM2NSAwLTQ2IDIwLjYzNS00 NiA0NiAwIDI1LjM2NCAyMC42MzUgNDYgNDYgNDZzNDYtMjAuNjM2IDQ2LTQ2YzAt MjUuMzY1LTIwLjYzNS00Ni00Ni00NnoiPjwvcGF0aD48L3N2Zz4=') no-repeat center;  /* opera, chrome, and safari */
+        mask: url('data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1p Y29uPSJxdWVzdGlvbi1jaXJjbGUiIGNsYXNzPSJzdmctaW5saW5lLS1mYSBmYS1x dWVzdGlvbi1jaXJjbGUgZmEtdy0xNiIgcm9sZT0iaW1nIiB4bWxucz0iaHR0cDov L3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0 aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik01MDQgMjU2YzAgMTM2Ljk5Ny0xMTEu MDQzIDI0OC0yNDggMjQ4UzggMzkyLjk5NyA4IDI1NkM4IDExOS4wODMgMTE5LjA0 MyA4IDI1NiA4czI0OCAxMTEuMDgzIDI0OCAyNDh6TTI2Mi42NTUgOTBjLTU0LjQ5 NyAwLTg5LjI1NSAyMi45NTctMTE2LjU0OSA2My43NTgtMy41MzYgNS4yODYtMi4z NTMgMTIuNDE1IDIuNzE1IDE2LjI1OGwzNC42OTkgMjYuMzFjNS4yMDUgMy45NDcg MTIuNjIxIDMuMDA4IDE2LjY2NS0yLjEyMiAxNy44NjQtMjIuNjU4IDMwLjExMy0z NS43OTcgNTcuMzAzLTM1Ljc5NyAyMC40MjkgMCA0NS42OTggMTMuMTQ4IDQ1LjY5 OCAzMi45NTggMCAxNC45NzYtMTIuMzYzIDIyLjY2Ny0zMi41MzQgMzMuOTc2QzI0 Ny4xMjggMjM4LjUyOCAyMTYgMjU0Ljk0MSAyMTYgMjk2djRjMCA2LjYyNyA1LjM3 MyAxMiAxMiAxMmg1NmM2LjYyNyAwIDEyLTUuMzczIDEyLTEydi0xLjMzM2MwLTI4 LjQ2MiA4My4xODYtMjkuNjQ3IDgzLjE4Ni0xMDYuNjY3IDAtNTguMDAyLTYwLjE2 NS0xMDItMTE2LjUzMS0xMDJ6TTI1NiAzMzhjLTI1LjM2NSAwLTQ2IDIwLjYzNS00 NiA0NiAwIDI1LjM2NCAyMC42MzUgNDYgNDYgNDZzNDYtMjAuNjM2IDQ2LTQ2YzAt MjUuMzY1LTIwLjYzNS00Ni00Ni00NnoiPjwvcGF0aD48L3N2Zz4=') no-repeat center;
         background-color: white;
         width: 1.3em;
         height: 1.3em;
@@ -1076,10 +1110,129 @@ ul.dropdown-options {
 
 .region-grid {
     display: grid;
-    grid-template-columns: auto 25%;
+    grid-template-columns: 75% 25%;
     grid-gap: 1px;
 }
 
 .table-split-left {
     border-right: 5px solid $table-background;
+}
+
+
+.colour-square {
+    height: 1em;
+    width: 1em;
+    display: inline-block;
+    border: 1px solid black;
+    margin-right: 0.5em;
+    vertical-align: middle;
+}
+
+/* A generalised indicator for non-overview sections to show which gene is currently
+   selected. While the object should be consistently styled, the positioning options
+   can, and probably should, be overridden.
+*/
+.cds-selected-marker {
+    opacity: 0;  // always starts effectively hidden
+    height: 3px;
+    width: 3px;
+    background-color: black;
+    display: inline-block;
+    border: 1px solid black;
+    vertical-align: middle;
+
+    &.active {  // becomes visibile when the "active" class is added
+        opacity: 1;
+    }
+
+    // the remainder is relative layout and can be overridden
+    // these defaults assume that the marker is on the left of the name
+    margin: 0.1em;
+    margin-right: 0.5em;
+}
+
+.tfbs-details-container {
+    .tfbs-weak-hits {
+        padding-bottom: 1em;
+    }
+    .tfbs-section-header {
+        font-weight: bold;
+    }
+    .tfbs-hit-list {
+        display: grid;
+        grid-template-columns: max-content max-content;
+        padding-left: 2em;
+
+        .tfbs-hit-detail {
+            display: inline-block;
+            grid-column: 1;
+            padding-top: 1.5em;
+
+            span {
+                font-weight: bold;
+            }
+        }
+        .tfbs-confidence {
+            grid-column: 2;
+            margin-left: auto;
+            padding-top: 1.5em;
+        }
+        .tfbs-svg-container {
+          grid-column-start: 1;
+          grid-column-end: 3;
+
+            * .tfbs-sequence {
+                @extend .serif;
+            }
+            * .tfbs-nearby {
+                path, .tfbs-ellipsis {
+                    fill: #c6c6c6;
+                }
+                line {
+                    stroke: #c6c6c6;
+                }
+            }
+            * .tfbs-hit-text-nearby {
+                fill: #c6c6c6;
+            }
+            * .tfbs-coordinate {
+                font-size: 80%;
+            }
+            * .tfbs-line {
+                stroke: black;
+            }
+            * .tfbs-sequence-hit {
+                font-weight: bold;
+            }
+            * .tfbs-gene-label {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.tfbs-sidepanel {
+    * .tfbs-sidepanel-table {
+        margin: 1em;
+
+        * th, * td {
+            padding: .8em 1em;
+        }
+        thead tr v{
+            font-size: 200%;
+        }
+        tbody tr {
+            border-bottom: 1px solid #ddd;
+
+            &:nth-of-type(even) {
+                background-color: #f3f3f3;
+            }
+            &:last-of-type {
+                border-bottom: 2px solid #444;
+            }
+            &:first-of-type {
+                border-top: 2px solid #444;
+            }
+        }
+    }
 }
