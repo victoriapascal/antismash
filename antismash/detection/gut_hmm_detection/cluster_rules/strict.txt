@@ -46,6 +46,12 @@ RULE Arginine2putrescine
     NEIGHBOURHOOD 10
     CONDITIONS (minimum(3, [Arginase, Amidinotransf, OKR_DC_1_7_arginine, OKR_DC_1, OTCace, AdoMet_dc])) or ((OKR_DC_1_5_ornithine or OKR_DC_1 or Orn_Arg_deC_N) and minimum(1, [PAD_porph, OTCace, OTCace_N, Arginase]))
 
+RULE acetate2butyrate
+    COMMENT Acetate to butyrate pathway
+    CUTOFF 10
+    NEIGHBOURHOOD 10
+    CONDITIONS not (POR or POR_N or PFOR_II) and minimum(4, [HCDH_N, ECH_2, Thiolase_N, ketoacyl-synt, Acyl-CoA_dh_1, Acyl-CoA_dh_2, ETF, ETF_alpha]) and HCDH and minimum(1, [Thiolase_C, EC1_2-faecali, ECH1_Enoyl_CoA_DH1, ECH1_Enoyl_CoA_DH2, ECH1_Enoyl_CoA_DH3, ECH1_Enoyl_CoA_DH4])
+
 RULE Putrescine2spermidine
     COMMENT putrescine to spermidine subpathways
     CUTOFF 10
@@ -57,7 +63,7 @@ RULE proline2aminovalerate
     CUTOFF 10
     NEIGHBOURHOOD 10
     CONDITIONS Proline_reductase and (Pro_racemase or GRDB) and not ACP_syn_III_C ##ACP_syn_III_C belongs to the gly reductase pathway
-    
+
 RULE Leucine_reduction
     COMMENT Leucine reductive branch
     CUTOFF 10
@@ -77,12 +83,6 @@ RULE bai_operon
     NEIGHBOURHOOD 10
     CONDITIONS (minimum(2, [AMP-binding, adh_short, adh_short_C2, KR, CoA_transf_3, Pyr_redox, NAD_binding_8, FAD_oxidored, FAD_binding_2]) and baiH and baiCD) or (minimum(3, [Dala_Dala_lig_C, Dala_Dala_lig_N, CPSase_L_D2, ATP-grasp_4, ATP-grasp_3, GARS_A, Acyltransferase, AMP-binding, adh_short, adh_short_C2, KR, CoA_transf_3, Pyr_redox, NAD_binding_8, FAD_oxidored, FAD_binding_2, LysM, GHMP_kinases_C, GHMP_kinases_N]) and baiH and baiCD)
 
-RULE acetate2butyrate
-    COMMENT Acetate to butyrate pathway
-    CUTOFF 10
-    NEIGHBOURHOOD 10
-    CONDITIONS not (POR or POR_N or PFOR_II) and minimum(4, [HCDH_N, ECH_2, Thiolase_N, ketoacyl-synt, Acyl-CoA_dh_1, Acyl-CoA_dh_2, ETF, ETF_alpha]) and HCDH and minimum(1, [Thiolase_C, EC1_2-faecali, ECH1_Enoyl_CoA_DH1, ECH1_Enoyl_CoA_DH2, ECH1_Enoyl_CoA_DH3, ECH1_Enoyl_CoA_DH4])
-
 RULE AAA_reductive_branch
     COMMENT Aromatic amino acid reductive branch
     CUTOFF 10
@@ -90,13 +90,13 @@ RULE AAA_reductive_branch
     CONDITIONS minimum(4, [BcrAD_BadFG, HCDH, ACP_syn_III, ACP_syn_III_C, Acyl-CoA_dh_1, Acyl-CoA_dh_2, HCDH_N, Hacid_dh_C, Hacid_dh, AlaDh_PNT_C, IlvN, ECH_1, ECH_2, ETF, ETF_alpha, NAD_Gly3P_dh_N, Thiolase_C, Thiolase_N, ketoacyl-synt]) and HAAA1 and not HleuS1
 
 RULE porA
-    COMMENT porA metabolism: Val,Ile,Leu,Tyr, Phe to phenylacetate 
+    COMMENT porA metabolism: Val,Ile,Leu,Tyr, Phe to phenylacetate
     CUTOFF 5
     NEIGHBOURHOOD 10
     CONDITIONS Fer4_7 and TPP_enzyme_C and POR and POR_N and PFOR_II and not (EKR or Fer4_16)
 
 RULE PFOR_II_pathway
-    COMMENT pyruvate to acetate 
+    COMMENT pyruvate to acetate
     SUPERIORS porA
     CUTOFF 5
     NEIGHBOURHOOD 10
@@ -200,7 +200,7 @@ RULE Indoleacetate2scatole
     CUTOFF 2
     NEIGHBOURHOOD 10
     CONDITIONS PFL-like and Gly_radical_scatole and minimum(1, [MFS_1, Radical_SAM, TPR_12])
-        
+
 RULE Phenylacetate2toluene
     COMMENT toluene formation from phenylacetate
     CUTOFF 2
@@ -238,7 +238,7 @@ RULE Nitrate_reductase
     CONDITIONS Nitr_red_bet_C and Nitrate_red_del and Nitrate_red_gam and Molybdopterin and minimum(2, [Nitr_red_alph_N, Molybdopterin, Molydop_binding, Fer4_11])
 
 RULE Ech_complex
-    COMMENT Fdred to Fdox 
+    COMMENT Fdred to Fdox
     CUTOFF 10
     NEIGHBOURHOOD 10
     CONDITIONS NADHdh and Oxidored_q6 and Complex1_30kDa and Complex1_49kDa and Proton_antipo_M and Proton_antipo_N and not (Oxidored_q4 or Oxidored_q3 or Molybdopterin or Molydop_binding)
@@ -261,8 +261,86 @@ RULE NADH_dehydrogenase_I
     NEIGHBOURHOOD 10
     CONDITIONS (Oxidored_q4 and Oxidored_q6 and Complex1_30kDa and Complex1_49kDa and NADHdh and Oxidored_q3 and Oxidored_q2 and minimum(4, [Fe-2S_thioredx, Fer2_4, Fer4_7, Molybdop_Fe4S4, Molydop_binding, NADH-G_4Fe-4S_3, NADH_4Fe-4S, Proton_antipo_M, Proton_antipo_N, SLBB]))
 
-RULE uric_acid
-    COMMENT uric acid metabolism
+RULE Bilirubin_reductase
+    COMMENT Reduce bilirubin to urobilinogen
+    CUTOFF 5
+    NEIGHBOURHOOD 10
+    CONDITIONS BilR_short and Flavodoxin_3#specific BilR_short.hmm has been built and BilR long version not included
+
+RULE Anaerobic_sulfite_redutase
+    COMMENT Anaerobic sulfite reduction to sulfide
     CUTOFF 10
     NEIGHBOURHOOD 10
-    CONDITIONS XDH and Peptidase_M20 and minimum(2, [DHP, SER, PALP])
+    CONDITIONS Fer4_22 and cds(DHODB_Fe-S_bind and NAD_binding_1) and cds(NIR_SIR and NIR_SIR_ferr)
+
+RULE Phenylpyruvate_ferredoxin_oxidoreductase
+    COMMENT Phenylpyruvate to phenylacetic acid anaerobic reaction
+    CUTOFF 10
+    NEIGHBOURHOOD 10
+    CONDITIONS cds(POR_N and TPP_enzyme_C and not PFOR_II) and POR and not cds(POR_N and TPP_enzyme_C and POR)
+
+RULE putative_2-oxoglutarate_ferredoxin_oxidoreductase
+    COMMENT Oxidase 2-oxoglutarate to succinyl-CoA
+    CUTOFF 10
+    NEIGHBOURHOOD 10
+    CONDITIONS cds(POR_N and POR and PFOR_II) and TPP_enzyme_C and not cds(POR_N and TPP_enzyme_C and POR)
+
+RULE Sulfate2PAPS
+    COMMENT  Forms activated sulfate
+    CUTOFF 4
+    NEIGHBOURHOOD 10
+    CONDITIONS PAPS_reduct and GTP_EFTU and APS_kinase #specific cysN.hmm has been built, but GTP_EFTU works too. Replace with cysN if necessary.
+
+RULE PAPS2sulfide
+    COMMENT  Reduce PAPS to sulfide with sulfite as the intermediate
+    CUTOFF 10
+    NEIGHBOURHOOD 10
+    CONDITIONS cds(NIR_SIR_ferr and NIR_SIR) and minimum(2, [NAD_binding_1, Flavodoxin_1, FAD_binding_1]) and cds(PAPS_reduct and not DUF3440) and not minimum(2, [PAPS_reduct,cysN,GTP_EFTU])
+
+RULE ButyrylCoA2butyrate
+    COMMENT Catalyze the Butyryl-CoA to butyrate, terminal step of acetate to butyrate pathway
+    CUTOFF 10
+    NEIGHBOURHOOD 10
+    CONDITIONS PTA_PTB and Acetate_kinase
+
+RULE r-butyrobetaine2TMA
+    COMMENT import r-butyrobetaine and degrade to TMA
+    CUTOFF 10
+    NEIGHBOURHOOD 10
+    CONDITIONS cds(Acyl-CoA_dh_N and Acyl-CoA_dh_M and Acyl-CoA_dh_1) and CoA_transf_3 and BCCT #some bacteria has 2 CoA_transf_3 in the gene cluster
+
+RULE taurine2sulfite
+    COMMENT Catalyzes the alpha-ketoglutarate-dependent hydroxylation of taurine yielding sulfite and aminoacetaldehyde
+    CUTOFF 5
+    NEIGHBOURHOOD 10
+    CONDITIONS OpuAC and ABC_tran and BPD_transp_1 and TauD
+
+RULE Alkanesulfonate2sulfite
+    COMMENT Catalyzes the conversion of pentanesulfonate to sulfite and pentaldehyde
+    CUTOFF 4
+    NEIGHBOURHOOD 10
+    CONDITIONS FMN_red and Bac_luciferase and ABC_tran and NMT1 and BPD_transp_1 #NMT1 score 40
+
+RULE sulfoquinovose-EMP_pathway
+    COMMENT Catalyzes the conversion of sulfoquinovose to sulphonate
+    CUTOFF 10
+    NEIGHBOURHOOD 10
+    CONDITIONS PfkB and DeoC and GlcNAc_2-epim and minimum(2,[Aldose_epim,Glyco_hydro_31_2nd,MFS_2,NAD_binding_2])
+
+RULE sulfoquinovose-ED_pathway
+    COMMENT Catalyzes the conversion of sulfoquinovose to 3-sulfolactate
+    CUTOFF 15
+    NEIGHBOURHOOD 10
+    CONDITIONS Aldedh and SGL and HpcH_HpaI and ILVD_EDD and minimum(1,[TauE,Glyco_hydro_31_2nd,adh_short_C2])
+
+RULE xanthine_dehydrogenase
+    COMMENT purine metabolism, xanthine to uric acid.
+    CUTOFF 10
+    NEIGHBOURHOOD 10
+    CONDITIONS cds(Fer2 and Fer2_2) and cds(Ald_Xan_dh_C and MoCoBD_1 and MoCoBD_2) and FAD_binding_5
+
+RULE uric_acid2SCFA
+    COMMENT purine metabolism, xanthine to uric acid.
+    CUTOFF 11
+    NEIGHBOURHOOD 14
+    CONDITIONS PALP and Amidohydro_1 and Peptidase_M20 and minimum(2,[Xan_ur_permease,Ald_Xan_dh_C,Fer4_20,Pyr_redox_2,Peptidase_M20])

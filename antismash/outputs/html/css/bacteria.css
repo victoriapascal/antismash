@@ -875,6 +875,274 @@ rect.Others_HGD_unassigned {
   background-color: #e4e2e0;
 }
 
+.Bilirubin_reductase {
+  background-color: #a600c5;
+}
+.Bilirubin_reductase a, .Bilirubin_reductase a:link, .Bilirubin_reductase a:visited {
+  color: white;
+}
+rect.Bilirubin_reductase {
+  fill: #a600c5;
+  stroke: orangered;
+}
+.Bilirubin_reductase.active {
+  border-color: orangered;
+  border-width: 2px;
+  border-style: solid;
+}
+.Bilirubin_reductase:hover {
+  background-color: #cd00f3;
+}
+
+.xanthine_dehydrogenase {
+  background-color: #a600c5;
+}
+.xanthine_dehydrogenase a, .xanthine_dehydrogenase a:link, .xanthine_dehydrogenase a:visited {
+  color: white;
+}
+rect.xanthine_dehydrogenase {
+  fill: #a600c5;
+  stroke: orangered;
+}
+.xanthine_dehydrogenase.active {
+  border-color: orangered;
+  border-width: 2px;
+  border-style: solid;
+}
+.xanthine_dehydrogenase:hover {
+  background-color: #cd00f3;
+}
+
+.Phenylpyruvate_ferredoxin_oxidoreductase {
+  background-color: #a600c5;
+}
+.Phenylpyruvate_ferredoxin_oxidoreductase a, .Phenylpyruvate_ferredoxin_oxidoreductase a:link,
+.Phenylpyruvate_ferredoxin_oxidoreductase a:visited {
+  color: white;
+}
+rect.Phenylpyruvate_ferredoxin_oxidoreductase {
+  fill: #a600c5;
+  stroke: orangered;
+}
+.Phenylpyruvate_ferredoxin_oxidoreductase.active {
+  border-color: orangered;
+  border-width: 2px;
+  border-style: solid;
+}
+.Phenylpyruvate_ferredoxin_oxidoreductase:hover {
+  background-color: #cd00f3;
+}
+
+.r-butyrobetaine2TMA {
+  background-color: #a600c5;
+}
+.r-butyrobetaine2TMA a, .r-butyrobetaine2TMA a:link, .r-butyrobetaine2TMA a:visited {
+  color: white;
+}
+rect.r-butyrobetaine2TMA {
+  fill: #a600c5;
+  stroke: orangered;
+}
+.r-butyrobetaine2TMA.active {
+  border-color: orangered;
+  border-width: 2px;
+  border-style: solid;
+}
+.r-butyrobetaine2TMA:hover {
+  background-color: #cd00f3;
+}
+
+.putative_2-oxoglutarate_ferredoxin_oxidoreductase {
+  background-color: #cecbc8;
+}
+.putative_2-oxoglutarate_ferredoxin_oxidoreductase a, .putative_2-oxoglutarate_ferredoxin_oxidoreductase a:link,
+.putative_2-oxoglutarate_ferredoxin_oxidoreductase a:visited {
+  color: blue;
+}
+rect.putative_2-oxoglutarate_ferredoxin_oxidoreductase {
+  fill: #cecbc8;
+  stroke: orangered;
+}
+.putative_2-oxoglutarate_ferredoxin_oxidoreductase.active {
+  border-color: orangered;
+  border-width: 2px;
+  border-style: solid;
+}
+.putative_2-oxoglutarate_ferredoxin_oxidoreductase:hover {
+  background-color: #e4e2e0;
+}
+
+.uric_acid2SCFA {
+  background-color: #52bf90;
+}
+.uric_acid2SCFA a, .uric_acid2SCFA a:link, .uric_acid2SCFA a:visited {
+  color: black;
+}
+rect.uric_acid2SCFA {
+  fill: #52bf90;
+  stroke: orangered;
+}
+.uric_acid2SCFA.active {
+  border-color: orangered;
+  border-width: 2px;
+  border-style: solid;
+}
+.uric_acid2SCFA:hover {
+  background-color: #74cba5;
+}
+
+.ButyrylCoA2butyrate {
+  background-color: #52bf90;
+}
+.ButyrylCoA2butyrate a, .ButyrylCoA2butyrate a:link, .ButyrylCoA2butyrate a:visited {
+  color: black;
+}
+rect.ButyrylCoA2butyrate {
+  fill: #52bf90;
+  stroke: orangered;
+}
+.ButyrylCoA2butyrate.active {
+  border-color: orangered;
+  border-width: 2px;
+  border-style: solid;
+}
+.ButyrylCoA2butyrate:hover {
+  background-color: #74cba5;
+}
+
+.Anaerobic_sulfite_redutase {
+  background-color: #519bfc;
+}
+.Anaerobic_sulfite_redutase a, .Anaerobic_sulfite_redutase a:link, .Anaerobic_sulfite_redutase a:visited {
+  color: black;
+}
+rect.Anaerobic_sulfite_redutase {
+  fill: #519bfc;
+  stroke: orangered;
+}
+.Anaerobic_sulfite_redutase.active {
+  border-color: orangered;
+  border-width: 2px;
+  border-style: solid;
+}
+.Anaerobic_sulfite_redutase:hover {
+  background-color: #81b5f7;
+}
+
+.Sulfate2PAPS {
+  background-color: #519bfc;
+}
+.Sulfate2PAPS a, .Sulfate2PAPS a:link, .Sulfate2PAPS a:visited {
+  color: black;
+}
+rect.Sulfate2PAPS {
+  fill: #519bfc;
+  stroke: orangered;
+}
+.Sulfate2PAPS.active {
+  border-color: orangered;
+  border-width: 2px;
+  border-style: solid;
+}
+.Sulfate2PAPS:hover {
+  background-color: #81b5f7;
+}
+
+.PAPS2sulfide {
+  background-color: #519bfc;
+}
+.PAPS2sulfide a, .PAPS2sulfide a:link, .PAPS2sulfide a:visited {
+  color: black;
+}
+rect.PAPS2sulfide {
+  fill: #519bfc;
+  stroke: orangered;
+}
+.PAPS2sulfide.active {
+  border-color: orangered;
+  border-width: 2px;
+  border-style: solid;
+}
+.PAPS2sulfide:hover {
+  background-color: #81b5f7;
+}
+
+.taurine2sulfite {
+  background-color: #519bfc;
+}
+.taurine2sulfite a, .taurine2sulfite a:link, .taurine2sulfite a:visited {
+  color: black;
+}
+rect.taurine2sulfite {
+  fill: #519bfc;
+  stroke: orangered;
+}
+.taurine2sulfite.active {
+  border-color: orangered;
+  border-width: 2px;
+  border-style: solid;
+}
+.taurine2sulfite:hover {
+  background-color: #81b5f7;
+}
+
+.Alkanesulfonate2sulfite {
+  background-color: #519bfc;
+}
+.Alkanesulfonate2sulfite a, .Alkanesulfonate2sulfite a:link, .Alkanesulfonate2sulfite a:visited {
+  color: black;
+}
+rect.Alkanesulfonate2sulfite {
+  fill: #519bfc;
+  stroke: orangered;
+}
+.Alkanesulfonate2sulfite.active {
+  border-color: orangered;
+  border-width: 2px;
+  border-style: solid;
+}
+.Alkanesulfonate2sulfite:hover {
+  background-color: #81b5f7;
+}
+
+.sulfoquinovose-EMP_pathway {
+  background-color: #519bfc;
+}
+.sulfoquinovose-EMP_pathway a, .sulfoquinovose-EMP_pathway a:link, .sulfoquinovose-EMP_pathway a:visited {
+  color: black;
+}
+rect.sulfoquinovose-EMP_pathway {
+  fill: #519bfc;
+  stroke: orangered;
+}
+.sulfoquinovose-EMP_pathway.active {
+  border-color: orangered;
+  border-width: 2px;
+  border-style: solid;
+}
+.sulfoquinovose-EMP_pathway:hover {
+  background-color: #81b5f7;
+}
+
+.sulfoquinovose-ED_pathway {
+  background-color: #519bfc;
+}
+.sulfoquinovose-ED_pathway a, .sulfoquinovose-ED_pathway a:link, .sulfoquinovose-ED_pathway a:visited {
+  color: black;
+}
+rect.sulfoquinovose-ED_pathway {
+  fill: #519bfc;
+  stroke: orangered;
+}
+.sulfoquinovose-ED_pathway.active {
+  border-color: orangered;
+  border-width: 2px;
+  border-style: solid;
+}
+.sulfoquinovose-ED_pathway:hover {
+  background-color: #81b5f7;
+}
+
 .OD_unknown {
   background-color: #cecbc8;
 }
