@@ -50,7 +50,7 @@ from antismash.modules import (active_site_finder,
 from antismash.outputs import html, svg
 from antismash.custom_typing import AntismashModule
 
-__version__ = "1.0.0"
+__version__ = "2.0.0"
 
 
 def get_all_modules() -> List[AntismashModule]:
