@@ -4,10 +4,82 @@
 """ JSON-friendly classes explicitly for use by the javascript drawing libraries
 """
 
-from typing import Any, Iterator, List, Tuple
+from dataclasses import dataclass, field
+from typing import Any, Iterator, List, Tuple, IO, Union, Dict, Callable
 
 from antismash.common.secmet.features import CDSFeature
 from antismash.common.secmet.qualifiers import NRPSPKSQualifier
+from antismash.common.secmet.record import Seq
+from orjson import (
+    loads,  # pylint: disable=unused-import  # used by others
+    OPT_NON_STR_KEYS as _OPT_CONVERT_NON_STR_KEYS,
+    OPT_SORT_KEYS as _OPT_SORT_KEYS,
+    OPT_INDENT_2 as _OPT_INDENT_2,
+    dumps as _dumps,
+)
+
+
+JSONBase = Union[int, float, str, bool, None]
+JSONCompatible = Union[
+    Dict[str, Union["JSONCompatible"]],
+    List["JSONCompatible"],
+    Tuple["JSONCompatible"],
+    JSONBase
+]
+
+
+def _base_convertor(obj: Any) -> Any:
+    # handles any conversion methods for classes that aren't default types or dataclasses
+    if isinstance(obj, Seq):
+        return str(obj)
+    if hasattr(obj, "to_json"):
+        return obj.to_json()
+    if hasattr(obj, "__json__"):
+        return obj.__json__()
+    # but if no conversion method is found, then an error must be raised for orjson (and stdlib json, for that matter)
+    raise TypeError
+
+
+def _convert_std_to_orson(*, sort_keys: bool = False, option: int = 0, indent: bool = True) -> int:
+    # always match stdlib JSON's default behaviour, where non-string keys are converted to string
+    option |= _OPT_CONVERT_NON_STR_KEYS
+    if sort_keys:
+        option |= _OPT_SORT_KEYS
+    if indent:
+        option |= _OPT_INDENT_2
+    return option
+
+
+def dumps(obj: Any, *, default: Callable[[Any], Any] = _base_convertor, indent: bool = False,
+          sort_keys: bool = False, option: int = 0,
+          ) -> str:
+    """ Converts the given object to a JSON string
+
+        Arguments:
+            obj: the object to convert
+            default: an optional override of the usual class convertor handler for non-standard types
+            indent: a boolean indicating whether to use indents in the string conversion (always 2 spaces if used)
+            sort_keys: whether the child attributes should be sorted by key
+            option: an orjson option value (see orjson documentation for possible values)
+
+        Returns:
+            the string generated
+    """
+    option = _convert_std_to_orson(indent=indent, sort_keys=sort_keys, option=option)
+    return _dumps(obj, default=default, option=option).decode()
+
+
+def load(handle: IO) -> dict[str, Any]:
+    """ Reads in JSON text from the given file handle and returns the information using
+        standard types.
+
+        Arguments:
+            handle: the file handle to read from
+
+        Returns:
+            a dictionary mapping loaded key-value pairs
+    """
+    return loads(handle.read())
 
 
 class JSONBase(dict):

@@ -58,3 +58,15 @@ PAD_porph,Amidinotransf
 Thiolase_N,ketoacyl-synt
 Succ_CoA_lig,Ligase_CoA
 PTA_PTB,FA_synthesis
+MarR,Flavodoxin_3
+Fer4_22,DHODB_Fe-S_bind
+cysN
+APS_kinase
+Flavodoxin_1,FAD_binding_1,GTP_EFTU
+BilR_short
+DUF3440
+OpuAC,ABC_tran,TauD
+FMN_red,Bac_luciferase,NMT1
+HpcH_HpaI,TauE,SGL
+Fer2_2,Ald_Xan_dh_C,MoCoBD_1,FAD_binding_5
+Xan_ur_permease,MoCoBD_2

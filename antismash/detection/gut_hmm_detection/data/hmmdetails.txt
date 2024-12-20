@@ -475,3 +475,34 @@ Oxidored_q3	NADH-ubiquinone/plastoquinone oxidoreductase chain 6	33	Oxidored_q3.
 Oxidored_q4	NADH-ubiquinone/plastoquinone oxidoreductase, chain 3	23	Oxidored_q4.hmm
 hpdC	4-hydroxyphenylacetate decarboxylase small gamma subunit	15	hpdC.hmm
 EKR	Domain of unknown function	19	EKR.hmm
+MarR	MarR family	24	MarR.hmm
+Flavodoxin_3	Flavodoxin domain	27	Flavodoxin_3.hmm
+Fer4_22	4Fe-4S dicluster domain	27	Fer4_22.hmm
+DHODB_Fe-S_bind	Iron-sulfur cluster binding domain of dihydroorotate dehydrogenase B	23	DHODB_Fe-S_bind.hmm
+cysN	Sulfate adenylyltransferase subunit 1	248	cysN.hmm
+APS_kinase	Adenylylsulphate kinase	21	APS_kinase.hmm
+Flavodoxin_1	Flavodoxin	25	Flavodoxin_1.hmm
+FAD_binding_1	FAD binding domain	32	FAD_binding_1.hmm
+GTP_EFTU	Elongation factor Tu GTP binding domain	26	GTP_EFTU.hmm
+BilR_short	Oxidoreduc_FMN domain of bilirubin reductase	300	BilR_short.hmm
+DUF3440	Domain of unknown function (DUF3440)	27	DUF3440.hmm
+ABC_tran	ABC transporter	25	ABC_tran.hmm
+OpuAC	Substrate binding domain of ABC-type glycine betaine transport system	70	OpuAC.hmm
+TauD	Taurine catabolism dioxygenase	27	TauD.hmm
+FMN_red	NADPH-dependent FMN reductase	24	FMN_red.hmm
+Bac_luciferase	Luciferase-like monooxygenase	27	Bac_luciferase.hmm
+NMT1	NMT1	40	NMT1.hmm
+PfkB	alpha/beta hydrolase fold	25	PfkB.hmm
+Glyco_hydro_31_2nd	Glycosyl hydrolases family 31 TIM-barrel domain	23	Glyco_hydro_31_2nd.hmm
+NAD_binding_11	NAD-binding of NADP-dependent 3-hydroxyisobutyrate dehydrogenase	30	NAD_binding_11.hmm
+DeoC	DeoC/LacD family aldolase	23	DeoC.hmm
+Aldose_epim	Aldose 1-epimerase	27	Aldose_epim.hmm
+TauE	Sulfite exporter TauE/SafE	20	TauE.hmm
+SGL	SMP-30/Gluconolactonase/LRE-like region	5	SGL.hmm
+HpcH_HpaI	HpcH/HpaI aldolase/citrate lyase family	25	HpcH_HpaI.hmm
+Fer2_2	[2Fe-2S] binding domain	30	Fer2_2.hmm
+Ald_Xan_dh_C	Aldehyde oxidase and xanthine dehydrogenase, a/b hammerhead domain	50	Ald_Xan_dh_C.hmm
+MoCoBD_1	Molybdopterin cofactor-binding domain	25	MoCoBD_1.hmm
+FAD_binding_5	FAD binding domain in molybdopterin dehydrogenase	27	FAD_binding_5.hmm
+Xan_ur_permease	FAD binding domain in molybdopterin dehydrogenase	27	Xan_ur_permease.hmm
+MoCoBD_2	Molybdopterin cofactor-binding domain	27	MoCoBD_2.hmm

@@ -46,3 +46,17 @@ OD_GR_eut_related,OD-GR
 OD_GR_unassigned,OD-GR
 Others_HGD_unassigned,Other
 fatty_acids-unassigned,Other
+Bilirubin_reductase,Other
+Anaerobic_sulfite_redutase,SF
+Phenylpyruvate_ferredoxin_oxidoreductase,Other
+Sulfate2PAPS,SF
+PAPS2sulfide,SF
+ButyrylCoA2butyrate,SCFA
+sulfoquinovose-ED_pathway,SF
+xanthine_dehydrogenase,Other
+r-butyrobetaine2TMA,Other
+putative_2-oxoglutarate_ferredoxin_oxidoreductase,Putative
+taurine2sulfite,SF
+Alkanesulfonate2sulfite,SF
+sulfoquinovose-EMP_pathway,SF
+uric_acid2SCFA,SCFA

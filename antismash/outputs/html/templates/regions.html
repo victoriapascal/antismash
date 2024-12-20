@@ -9,7 +9,7 @@
     <div class ="description-container">
       <div class="heading"> {{record.seq_record.name}} - Region {{region.get_region_number()}} - {{region.get_product_string()}} {{help_tooltip(svg_tooltip, "region_svg")}}</div>
       <div class="region-download">
-        <a href = {{ '%s.region%03d.gbk' % (record.id, region.get_region_number()) }}>Download region GenBank file</a>
+        <a href = {{'%s.region%03d.gbk' % (record.id, region.get_region_number()) }}>Download region GenBank file</a>
       </div>
       <div class = 'description-text'>
         {{region.description_text()}}
@@ -38,11 +38,21 @@
         {{le.legend('legend-type-transport', 'transport-related genes')}}
         {{le.legend('legend-type-regulatory', 'regulatory genes')}}
         {{le.legend('legend-type-resistance', 'resistance genes')}}
-	{{le.legend('legend-type-encapsulation', 'encapsulation genes')}}
+	    {{le.legend('legend-type-encapsulation', 'encapsulation genes')}}
         {{le.legend('legend-type-electron_transport', 'electron transport genes')}}
         {{le.legend('legend-type-other', 'other genes')}}
         {% if (options.tta_enabled or not options.minimal) and record.get_gc_content() >= options.tta_threshold %}
             {{le.legend('legend-tta-codon', 'TTA codons')}}
+        {% endif %}
+        <div style="margin-right: 2em;"></div>
+        {% if (options.tfbs or not options.minimal) %}
+            {% call le.static_symbol_legend('legend-binding-site', 'binding site') %}
+                <svg viewbox="0 -1 8 8">
+                    <g class="svgene-binding-site">
+                    <line x1="4" y1="8" x2="4" y1="4"></line>
+                    <circle cx="4" cy="2" r="2"></circle>
+                </svg>
+            {% endcall %}
         {% endif %}
         {% if region.has_subregion_by_tool("cassis") %}
             {{le.static_legend('legend-border-cassis', 'cluster extent as predicted by CASSIS')}}
