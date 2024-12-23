@@ -1,0 +1,60 @@
+FROM python:3.8-slim-buster as gdown
+
+RUN pip install gdown
+WORKDIR /
+RUN gdown "https://drive.google.com/u/0/uc?id=1OdGgvInnj8Q7IxchF8b3iWoXrb72uEjx&export=download" -O ClusterBlast.zip
+
+
+FROM alpine as downloader
+
+WORKDIR /
+
+COPY . /gutsmash
+RUN (find gutsmash/antismash/ -type f | xargs chmod go+rw) && \
+    (find gutsmash/antismash/ -name "*.py" | xargs chmod go+x) && \
+    (find gutsmash/antismash/ -type d | xargs chmod go+rwx)
+
+RUN wget https://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.hmm.gz
+RUN gunzip Pfam-A.hmm.gz
+RUN mv Pfam-A.hmm gutsmash/antismash/databases/
+
+RUN wget https://gutsmash.bioinformatics.nl/static/databases_to_share/resfam.zip
+RUN unzip resfam.zip
+RUN mv resfam gutsmash/antismash/databases/
+
+RUN wget https://gutsmash.bioinformatics.nl/static/databases_to_share/smcogs.hmm.zip
+RUN unzip smcogs.hmm.zip
+RUN mv smcogs.hmm gutsmash/antismash/detection/genefunctions/gut_data/
+
+# RUN wget https://gutsmash.bioinformatics.nl/static/databases_to_share/KnownClusterBlast.zip
+# RUN mkdir -p gutsmash/antismash/modules/clusterblast/data/known
+# RUN unzip KnownClusterBlast.zip -d gutsmash/antismash/modules/clusterblast/data/known
+
+COPY --from=gdown /ClusterBlast.zip /ClusterBlast.zip
+RUN unzip ClusterBlast.zip -d clusterblast
+RUN mv clusterblast gutsmash/antismash/databases/
+
+
+FROM mambaorg/micromamba:1.1.0
+
+USER $MAMBA_USER
+ARG MAMBA_DOCKERFILE_ACTIVATE=1
+COPY --chown=$MAMBA_USER:$MAMBA_USER docker/env.yaml /tmp/env.yaml
+RUN micromamba install -y -n base -f /tmp/env.yaml && \
+    micromamba clean --all --yes
+
+USER root
+COPY --from=downloader /gutsmash /usr/share/gutsmash
+RUN chmod -R 777 /usr/share/gutsmash/
+RUN hmmpress /usr/share/gutsmash/antismash/detection/genefunctions/gut_data/smcogs.hmm
+
+RUN apt-get update && apt-get install -y hmmer2 hmmer fasttree prodigal ncbi-blast+ muscle
+
+ENV PATH=/opt/conda/bin/:/opt/conda/condabin:/usr/share/gutsmash/:$PATH
+
+COPY ./GCA_000006765.1_ASM676v1_genomic.fna /tmp/GCA_000006765.1_ASM676v1_genomic.fna
+RUN run_gutsmash.py --cpus 4 --genefinding-tool prodigal --cb-knownclusters --cb-general \
+    --enable-genefunctions --output-dir GCA_000006765.1 GCA_000006765.1_ASM676v1_genomic.fna
+
+RUN chmod -R u-w /usr/share/gutsmash/
+USER $MAMBA_USER
